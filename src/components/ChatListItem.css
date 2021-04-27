@@ -4,6 +4,10 @@
   align-items: center;
   height: 70px;
 }
+.chatList.active {
+  background-color: #ebebeb;
+}
+
 .chatList:hover {
   background-color: #e9e7e7;
 }

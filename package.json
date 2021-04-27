@@ -14,6 +14,7 @@
         "@types/react-dom": "^17.0.0",
         "@types/styled-components": "^5.1.9",
         "emoji-picker-react": "^3.4.4",
+        "prop-types": "^15.7.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-scripts": "4.0.3",

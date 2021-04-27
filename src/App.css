@@ -56,7 +56,18 @@ header {
   border-bottom: 1px solid #eee;
   padding: 5px 15px;
 }
-
+.listArea__chatList {
+  flex: 1;
+  background-color: #fff;
+  overflow-y: auto;
+}
+.listArea__chatList::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.listArea__chatList::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
 .seach--input {
   background-color: #fff;
   height: 40px;
@@ -75,4 +86,5 @@ header {
 }
 
 .contentArea {
+  flex: 1;
 }

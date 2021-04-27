@@ -16,7 +16,11 @@ const ChatListArea: React.FC = () => {
         </div>
         <div className="chatList__line">
           <div className="chatList--lastMsg">
-            <p>Opaa tudo bem?</p>
+            <p>
+              Line 13:20: is assigned a value but never used
+              @typescript-eslint/no-unused-vars Search for the keywords to learn
+              more about each warning. To ignore, add
+            </p>
           </div>
         </div>
       </div>

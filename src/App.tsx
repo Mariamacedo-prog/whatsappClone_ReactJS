@@ -5,12 +5,27 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
+import ChatIntro from './components/ChatIntro';
+
 import ChatListItem from './components/ChatListItem';
 
 import './App.css';
 
 const App: React.FC = () => {
-  const [chatList, setChatList] = useState([{}, {}, {}, {}]);
+  const [chatList, setChatList] = useState([
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ]);
 
   return (
     <div className="App-window">
@@ -48,7 +63,7 @@ const App: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="contentArea">..d</div>
+      <ChatIntro />
     </div>
   );
 };

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import EmojiPicker from 'emoji-picker-react';
 
 import SearchIcon from '@material-ui/icons/Search';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
@@ -12,6 +14,18 @@ import MicIcon from '@material-ui/icons/Mic';
 import './ChatWindow.css';
 
 const ChatWindow: React.FC = () => {
+  const [emojiOpen, setEmojiOpen] = useState(false);
+
+  const handleEmojiClick = () => {};
+
+  const handleOpenEmoji = () => {
+    setEmojiOpen(true);
+  };
+
+  const handleCloseEmoji = () => {
+    setEmojiOpen(false);
+  };
+
   return (
     <div className="classWindow">
       <div className="classWindow--header">
@@ -37,12 +51,27 @@ const ChatWindow: React.FC = () => {
       </div>
       <div className="classWindow--body">...</div>
 
+      <div
+        className="classWindow--emojiArea"
+        style={{ height: emojiOpen ? '200px' : '0px' }}
+      >
+        <EmojiPicker
+          disableSearchBar
+          disableSkinTonePicker
+          onEmojiClick={handleEmojiClick}
+        />
+      </div>
+
       <div className="classWindow--footer">
         <div className="classWindow--pre">
-          <div className="btn">
+          <div
+            className="btn"
+            onClick={handleCloseEmoji}
+            style={{ width: emojiOpen ? 40 : 0 }}
+          >
             <CloseIcon style={{ color: '#919191' }} />
           </div>
-          <div className="btn">
+          <div className="btn" onClick={handleOpenEmoji}>
             <InsertEmoticonIcon style={{ color: '#919191' }} />
           </div>
         </div>

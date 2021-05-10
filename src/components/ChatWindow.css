@@ -1,0 +1,81 @@
+.classWindow {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.classWindow--header {
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+}
+.classWindow--headerInfo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.classWindow--avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.classWindow--name {
+  font-size: 17px;
+  color: #000;
+}
+.classWindow--headerButtons {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+.btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.classWindow--body {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #e5ddd5;
+  background-size: cover;
+  background-position: center;
+  background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+}
+
+.classWindow--footer {
+  height: 62px;
+  display: flex;
+  align-items: center;
+}
+.classWindow--pre {
+  display: flex;
+  margin: 0 15px;
+}
+.classWindow--inputArea {
+  flex: 1;
+}
+.classWindow--input {
+  width: 100%;
+  height: 40px;
+  border: 0;
+  outline: 0;
+  background: #fff;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #4a4a4a;
+  padding-left: 15px;
+}
+.classWindow--pos {
+  display: flex;
+  margin: 0 15px;
+}

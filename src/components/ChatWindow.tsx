@@ -13,10 +13,30 @@ import MicIcon from '@material-ui/icons/Mic';
 
 import './ChatWindow.css';
 
-const ChatWindow: React.FC = () => {
-  const [emojiOpen, setEmojiOpen] = useState(false);
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+  }
+}
 
-  const handleEmojiClick = () => {};
+const ChatWindow: React.FC = () => {
+  let recognition: any = null;
+
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition !== undefined) {
+    recognition = new SpeechRecognition();
+  }
+
+  const [emojiOpen, setEmojiOpen] = useState(false);
+  const [text, setText] = useState('');
+  const [listening, setListening] = useState(false);
+  const [list, setList] = useState([]);
+
+  const handleEmojiClick = (e: any, emojiObject: any) => {
+    setText(text + emojiObject.emoji);
+  };
 
   const handleOpenEmoji = () => {
     setEmojiOpen(true);
@@ -25,6 +45,26 @@ const ChatWindow: React.FC = () => {
   const handleCloseEmoji = () => {
     setEmojiOpen(false);
   };
+
+  const handleMicClick = () => {
+    if (recognition !== null) {
+      recognition.onstart = () => {
+        setListening(true);
+      };
+
+      recognition.onend = () => {
+        setListening(false);
+      };
+
+      recognition.onresult = (e: any) => {
+        setText(e.results[0][0].transcript);
+      };
+
+      recognition.start();
+    }
+  };
+
+  const handleSendClick = () => {};
 
   return (
     <div className="classWindow">
@@ -49,7 +89,11 @@ const ChatWindow: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="classWindow--body">...</div>
+      <div className="classWindow--body">
+        {list.map((item, key) => (
+          <MessageItem key={key} data={item} />
+        ))}
+      </div>
 
       <div
         className="classWindow--emojiArea"
@@ -72,7 +116,9 @@ const ChatWindow: React.FC = () => {
             <CloseIcon style={{ color: '#919191' }} />
           </div>
           <div className="btn" onClick={handleOpenEmoji}>
-            <InsertEmoticonIcon style={{ color: '#919191' }} />
+            <InsertEmoticonIcon
+              style={{ color: emojiOpen ? '#009688' : '#919191' }}
+            />
           </div>
         </div>
         <div className="classWindow--inputArea">
@@ -80,12 +126,25 @@ const ChatWindow: React.FC = () => {
             type="text"
             className="classWindow--input"
             placeholder="Digite uma mensagem"
+            value={text}
+            onChange={e => setText(e.target.value)}
           />
         </div>
         <div className="classWindow--pos">
-          <div className="btn">
-            <SendIcon style={{ color: '#919191' }} />
-          </div>
+          {text === '' && (
+            <div className="btn" onClick={handleMicClick}>
+              <MicIcon style={{ color: listening ? '#126ece' : '#919191' }} />
+            </div>
+          )}
+
+          {text !== '' && (
+            <div className="btn">
+              <SendIcon
+                style={{ color: '#919191' }}
+                onClick={handleSendClick}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

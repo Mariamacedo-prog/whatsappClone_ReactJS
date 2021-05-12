@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import EmojiPicker from 'emoji-picker-react';
 
@@ -10,7 +10,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
-
+import MessageItem from './MessageItem';
 import './ChatWindow.css';
 
 declare global {
@@ -19,7 +19,18 @@ declare global {
   }
 }
 
-const ChatWindow: React.FC = () => {
+interface User {
+  user: {
+    id: number;
+    avatar: string;
+    name: string;
+  };
+}
+
+const ChatWindow: React.FC<User> = ({ user }) => {
+  // ref para descer a barra de rolagem no body da conversa.
+  const body = useRef<HTMLDivElement | null>(null);
+
   let recognition: any = null;
 
   const SpeechRecognition =
@@ -32,7 +43,36 @@ const ChatWindow: React.FC = () => {
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [text, setText] = useState('');
   const [listening, setListening] = useState(false);
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([
+    { author: 123, body: 'bla bla bla ' },
+    { author: 123, body: 'bla bla ' },
+    { author: 1234, body: 'bla bla bla bla bla' },
+    { author: 123, body: 'bla bla bla ' },
+    { author: 123, body: 'bla bla ' },
+    { author: 1234, body: 'bla bla bla bla bla' },
+    { author: 123, body: 'bla bla bla ' },
+    { author: 123, body: 'bla bla ' },
+    { author: 1234, body: 'bla bla bla bla bla' },
+    { author: 123, body: 'bla bla bla ' },
+    { author: 123, body: 'bla bla ' },
+    { author: 1234, body: 'bla bla bla bla bla' },
+    { author: 123, body: 'bla bla bla ' },
+    { author: 123, body: 'bla bla ' },
+    { author: 1234, body: 'bla bla bla bla bla' },
+    { author: 123, body: 'bla bla bla ' },
+    { author: 123, body: 'bla bla ' },
+    { author: 1234, body: 'bla bla bla bla bla' },
+  ]);
+
+  // conta para verificar onde esta a barra de rolagem e descer para o final da conversa.
+  useEffect(() => {
+    if (body && body.current) {
+      if (body.current.scrollHeight > body.current.offsetHeight) {
+        body.current.scrollTop =
+          body.current.scrollHeight - body.current.offsetHeight;
+      }
+    }
+  }, [list]);
 
   const handleEmojiClick = (e: any, emojiObject: any) => {
     setText(text + emojiObject.emoji);
@@ -89,9 +129,9 @@ const ChatWindow: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="classWindow--body">
+      <div ref={body} className="classWindow--body">
         {list.map((item, key) => (
-          <MessageItem key={key} data={item} />
+          <MessageItem key={key} data={item} user={user} />
         ))}
       </div>
 

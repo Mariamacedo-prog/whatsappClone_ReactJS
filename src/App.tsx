@@ -47,15 +47,17 @@ const App: React.FC = () => {
     },
   ]);
 
+  const [user, setUser] = useState({
+    id: 1234,
+    avatar:
+      'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
+    name: 'Maria Macedo',
+  });
   return (
     <div className="App-window">
       <div className="listArea">
         <header>
-          <img
-            className="header--avatar"
-            src="https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg"
-            alt="Avatar"
-          />
+          <img className="header--avatar" src={user.avatar} alt="Avatar" />
           <div className="header--buttons">
             <div className="header--btn">
               <DonutLargeIcon style={{ color: '#919191' }} />
@@ -89,7 +91,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="contentArea">
-        {activeChat.chatId !== undefined && <ChatWindow />}
+        {activeChat.chatId !== undefined && <ChatWindow user={user} />}
         {activeChat.chatId === undefined && <ChatIntro />}
       </div>
     </div>

@@ -5,6 +5,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
+import NewChat from './components/NewChat';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
 import ChatListItem from './components/ChatListItem';
@@ -53,16 +54,28 @@ const App: React.FC = () => {
       'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
     name: 'Maria Macedo',
   });
+
+  const [showNewChat, setShowNewChat] = useState(false);
+
+  const handleNewChat = () => {
+    setShowNewChat(true);
+  };
   return (
     <div className="App-window">
       <div className="listArea">
+        <NewChat
+          chatList={chatList}
+          user={user}
+          show={showNewChat}
+          setShow={setShowNewChat}
+        />
         <header>
           <img className="header--avatar" src={user.avatar} alt="Avatar" />
           <div className="header--buttons">
             <div className="header--btn">
               <DonutLargeIcon style={{ color: '#919191' }} />
             </div>
-            <div className="header--btn">
+            <div onClick={handleNewChat} className="header--btn">
               <ChatIcon style={{ color: '#919191' }} />
             </div>
             <div className="header--btn">

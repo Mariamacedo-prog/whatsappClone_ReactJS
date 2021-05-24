@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   padding: 3px;
-  max-width: 90%;
+  max-width: 80%;
 }
 .messageText {
   font-size: 14px;

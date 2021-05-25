@@ -121,9 +121,7 @@ const ChatWindow: React.FC<User> = ({ user }) => {
           <div className="btn">
             <SearchIcon style={{ color: '#919191' }} />
           </div>
-          <div className="btn">
-            <AttachFileIcon style={{ color: '#919191' }} />
-          </div>
+
           <div className="btn">
             <MoreVertIcon style={{ color: '#919191' }} />
           </div>
@@ -159,6 +157,9 @@ const ChatWindow: React.FC<User> = ({ user }) => {
             <InsertEmoticonIcon
               style={{ color: emojiOpen ? '#009688' : '#919191' }}
             />
+          </div>
+          <div className="btn">
+            <AttachFileIcon style={{ color: '#919191' }} />
           </div>
         </div>
         <div className="classWindow--inputArea">

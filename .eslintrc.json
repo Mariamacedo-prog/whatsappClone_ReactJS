@@ -33,6 +33,9 @@
       }
     ],
     "no-use-before-define": "off",
+    "no-alert": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "@typescript-eslint/no-empty-function": "off",
     "react/react-in-jsx-scope": "off",

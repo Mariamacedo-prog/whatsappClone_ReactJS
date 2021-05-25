@@ -5,8 +5,11 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
+import Api from './Api';
+
 import NewChat from './components/NewChat';
 import ChatIntro from './components/ChatIntro';
+import Login from './components/Login';
 import ChatWindow from './components/ChatWindow';
 import ChatListItem from './components/ChatListItem';
 
@@ -48,18 +51,29 @@ const App: React.FC = () => {
     },
   ]);
 
-  const [user, setUser] = useState({
-    id: 1234,
-    avatar:
-      'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-    name: 'Maria Macedo',
-  });
+  const [user, setUser] = useState<any | null>(null);
 
   const [showNewChat, setShowNewChat] = useState(false);
 
   const handleNewChat = () => {
     setShowNewChat(true);
   };
+
+  const handleLoginData = async (u: any) => {
+    const newUser = {
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL,
+    };
+
+    setUser(newUser);
+    await Api.addUser(newUser);
+  };
+
+  if (user === null) {
+    return <Login onReceive={handleLoginData} />;
+  }
+
   return (
     <div className="App-window">
       <div className="listArea">

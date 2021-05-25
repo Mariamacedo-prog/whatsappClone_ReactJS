@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -16,7 +16,7 @@ import ChatListItem from './components/ChatListItem';
 import './App.css';
 
 interface Chat {
-  chatId: number;
+  chatId: string;
   title: string;
   image: string;
 }
@@ -24,36 +24,22 @@ interface Chat {
 const App: React.FC = () => {
   const [activeChat, setActiveChat] = useState({} as Chat);
 
-  const [chatList, setChatList] = useState([
-    {
-      chatId: 1,
-      title: 'Fulano',
-      image:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-    },
-    {
-      chatId: 2,
-      title: 'Cicrano',
-      image:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-    },
-    {
-      chatId: 3,
-      title: 'Gabs',
-      image:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-    },
-    {
-      chatId: 4,
-      title: 'Lara',
-      image:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-    },
-  ]);
+  const [chatList, setChatList] = useState<any[]>([]);
 
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<any | null>({
+    id: '2fZLypkmoTasiC7thExWE52Acb92',
+    avatar:
+      'https://lh3.googleusercontent.com/a-/AOh14GhhlrGPIhWerqukacqRg7MbiQycP7AA37ozsbJu_qs=s96-c',
+    name: 'MAria macedo',
+  });
 
   const [showNewChat, setShowNewChat] = useState(false);
+
+  useEffect(() => {
+    if (user !== null) {
+      Api.onChatList(user.id, setChatList);
+    }
+  }, [user]);
 
   const handleNewChat = () => {
     setShowNewChat(true);

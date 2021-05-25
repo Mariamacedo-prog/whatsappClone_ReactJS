@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-
+import Api from '../Api';
 import './NewChat.css';
 
 interface NewChatInter {
@@ -14,36 +14,33 @@ interface NewChatInter {
   chatList: any;
 }
 
+interface Listcontact {
+  id: string;
+  name: string;
+  avatar: string;
+}
+
 const NewChat: React.FC<NewChatInter> = ({ user, chatList, show, setShow }) => {
-  const [list, setList] = useState([
-    {
-      id: 123,
-      avatar:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-      name: 'Maria',
-    },
-    {
-      id: 1234,
-      avatar:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-      name: 'Maria',
-    },
-    {
-      id: 12345,
-      avatar:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-      name: 'Maria',
-    },
-    {
-      id: 123456,
-      avatar:
-        'https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg',
-      name: 'Maria',
-    },
-  ]);
+  const [list, setList] = useState<Listcontact[]>([]);
+
+  useEffect(() => {
+    const getList = async () => {
+      if (user !== null) {
+        const results = await Api.getContactList(user.id);
+        setList(results);
+      }
+    };
+    getList();
+  }, [user]);
 
   const handleClose = () => {
     setShow(false);
+  };
+
+  const addNewChat = async (user2: any) => {
+    await Api.addNewChat(user, user2);
+
+    handleClose();
   };
 
   return (
@@ -56,13 +53,17 @@ const NewChat: React.FC<NewChatInter> = ({ user, chatList, show, setShow }) => {
       </div>
       <div className="newchat--list">
         {list.map((item, key) => (
-          <div className="newchat--item" key={key}>
+          <div
+            onClick={() => addNewChat(item)}
+            className="newchat--item"
+            key={key}
+          >
             <img
               className="newchat--itemAvatar"
-              src="https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg"
-              alt="avatar"
+              src={item.avatar}
+              alt={`avatar ${item.name}`}
             />
-            <div className="newchat--itemName">Maria macedo</div>
+            <div className="newchat--itemName">{item.name}</div>
           </div>
         ))}
       </div>

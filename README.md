@@ -1,6 +1,6 @@
 Clone do WhatsApp usando React(typescript) e firebase.
 
-~LOGIN~
+-LOGIN-
 Tela simples de login com Google.
 ![image](https://user-images.githubusercontent.com/69858181/119681640-a1eba680-be18-11eb-99af-b75fa20e15eb.png)
 

@@ -6,3 +6,6 @@
 ABRIR NOVA CONVERSA
 ![image](https://user-images.githubusercontent.com/69858181/119528108-4efdea80-bd57-11eb-9aa8-3b4c36fd766d.png)
 
+CHAT FUNCIONANDO 
+![image](https://user-images.githubusercontent.com/69858181/119676144-03f5dd00-be14-11eb-8af9-a033c20a060f.png)
+

@@ -7,6 +7,9 @@ Tela simples de login com Google.
 -INICIO-
 ![image](https://user-images.githubusercontent.com/69858181/119681704-ad3ed200-be18-11eb-8dcc-dbc48e312e2e.png)
 
+-NOVO CHAT-
+![image](https://user-images.githubusercontent.com/69858181/119683773-4e7a5800-be1a-11eb-8e64-e733c671ad71.png)
+
 -CHAT-
 Tela do chat com a conversa.
 ![image](https://user-images.githubusercontent.com/69858181/119681808-c47dbf80-be18-11eb-81e8-ad61e504d71f.png)

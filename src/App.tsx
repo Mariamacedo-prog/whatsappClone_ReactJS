@@ -26,12 +26,7 @@ const App: React.FC = () => {
 
   const [chatList, setChatList] = useState<any[]>([]);
 
-  const [user, setUser] = useState<any | null>({
-    id: '2fZLypkmoTasiC7thExWE52Acb92',
-    avatar:
-      'https://lh3.googleusercontent.com/a-/AOh14GhhlrGPIhWerqukacqRg7MbiQycP7AA37ozsbJu_qs=s96-c',
-    name: 'MAria macedo',
-  });
+  const [user, setUser] = useState<any | null>(null);
 
   const [showNewChat, setShowNewChat] = useState(false);
 
@@ -104,7 +99,9 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="contentArea">
-        {activeChat.chatId !== undefined && <ChatWindow user={user} />}
+        {activeChat.chatId !== undefined && (
+          <ChatWindow user={user} data={activeChat} />
+        )}
         {activeChat.chatId === undefined && <ChatIntro />}
       </div>
     </div>

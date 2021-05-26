@@ -10,6 +10,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import CloseIcon from '@material-ui/icons/Close';
 import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
+import Api from '../Api';
 import MessageItem from './MessageItem';
 import './ChatWindow.css';
 
@@ -25,9 +26,10 @@ interface User {
     avatar: string;
     name: string;
   };
+  data: any;
 }
 
-const ChatWindow: React.FC<User> = ({ user }) => {
+const ChatWindow: React.FC<User> = ({ user, data }) => {
   // ref para descer a barra de rolagem no body da conversa.
   const body = useRef<HTMLDivElement | null>(null);
 
@@ -43,26 +45,14 @@ const ChatWindow: React.FC<User> = ({ user }) => {
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [text, setText] = useState('');
   const [listening, setListening] = useState(false);
-  const [list, setList] = useState([
-    { author: 123, body: 'bla bla bla ' },
-    { author: 123, body: 'bla bla ' },
-    { author: 1234, body: 'bla bla bla bla bla' },
-    { author: 123, body: 'bla bla bla ' },
-    { author: 123, body: 'bla bla ' },
-    { author: 1234, body: 'bla bla bla bla bla' },
-    { author: 123, body: 'bla bla bla ' },
-    { author: 123, body: 'bla bla ' },
-    { author: 1234, body: 'bla bla bla bla bla' },
-    { author: 123, body: 'bla bla bla ' },
-    { author: 123, body: 'bla bla ' },
-    { author: 1234, body: 'bla bla bla bla bla' },
-    { author: 123, body: 'bla bla bla ' },
-    { author: 123, body: 'bla bla ' },
-    { author: 1234, body: 'bla bla bla bla bla' },
-    { author: 123, body: 'bla bla bla ' },
-    { author: 123, body: 'bla bla ' },
-    { author: 1234, body: 'bla bla bla bla bla' },
-  ]);
+  const [list, setList] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    setList([]);
+    const onsub = Api.onChatContent(data.chatId, setList, setUsers);
+    return onsub;
+  }, [data.chatId]);
 
   // conta para verificar onde esta a barra de rolagem e descer para o final da conversa.
   useEffect(() => {
@@ -104,18 +94,27 @@ const ChatWindow: React.FC<User> = ({ user }) => {
     }
   };
 
-  const handleSendClick = () => {};
+  const handleSendClick = () => {
+    if (text !== '') {
+      Api.sendMessage(data, user.id, 'text', text, users);
+
+      setText('');
+      setEmojiOpen(false);
+    }
+  };
+
+  const handleInputKeyUp = (e: any) => {
+    if (e.keyCode === 13) {
+      handleSendClick();
+    }
+  };
 
   return (
     <div className="classWindow">
       <div className="classWindow--header">
         <div className="classWindow--headerInfo">
-          <img
-            className="classWindow--avatar"
-            src="https://image.freepik.com/vetores-gratis/avatar-de-personagem-de-empresario-isolado_24877-60111.jpg"
-            alt="avatar"
-          />
-          <div className="classWindow--name">Maria macedo</div>
+          <img className="classWindow--avatar" src={data.image} alt="avatar" />
+          <div className="classWindow--name">{data.title}</div>
         </div>
         <div className="classWindow--headerButtons">
           <div className="btn">
@@ -169,6 +168,7 @@ const ChatWindow: React.FC<User> = ({ user }) => {
             placeholder="Digite uma mensagem"
             value={text}
             onChange={e => setText(e.target.value)}
+            onKeyUp={handleInputKeyUp}
           />
         </div>
         <div className="classWindow--pos">

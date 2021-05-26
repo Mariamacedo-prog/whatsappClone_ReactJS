@@ -19,7 +19,7 @@ const Login: React.FC<LoginFace> = ({ onReceive }) => {
 
   return (
     <div className="login">
-      <button type="button" onClick={handleGmail}>
+      <button type="button" className="loginBT" onClick={handleGmail}>
         Logar com Gmail
       </button>
     </div>

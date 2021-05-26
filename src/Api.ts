@@ -83,10 +83,83 @@ export default {
           const data = doc.data();
           if (data !== undefined) {
             if (data.chats) {
-              setChatList(data.chats);
+              const chat = [...data.chats];
+
+              chat.sort((a: any, b: any) => {
+                if (a.lastMessageDate === undefined) {
+                  return -1;
+                }
+                if (b.lastMessageDate === undefined) {
+                  return -1;
+                }
+                if (a.lastMessageDate.seconds < b.lastMessageDate.seconds) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              });
+
+              setChatList(chat);
             }
           }
         }
       });
+  },
+
+  onChatContent: (chatId: any, setList: any, setUsers: any) => {
+    return db
+      .collection('chats')
+      .doc(chatId)
+      .onSnapshot(doc => {
+        if (doc.exists) {
+          const data = doc.data();
+          if (data !== undefined) {
+            setList(data.messages);
+            setUsers(data.users);
+          }
+        }
+      });
+  },
+
+  sendMessage: async (
+    chatData: any,
+    userId: any,
+    type: any,
+    body: any,
+    users: any,
+  ) => {
+    const now = new Date();
+
+    db.collection('chats')
+      .doc(chatData.chatId)
+      .update({
+        messages: firebase.firestore.FieldValue.arrayUnion({
+          type,
+          author: userId,
+          body,
+          date: now,
+        }),
+      });
+
+    for (const i in users) {
+      const u = await db.collection('Users').doc(users[i]).get();
+      const uData = u.data();
+      if (uData !== undefined) {
+        if (uData.chats) {
+          const chats = [...uData.chats];
+
+          for (const e in chats) {
+            if (chats[e].chatId === chatData.chatId) {
+              chats[e].lastMessage = body;
+              chats[e].lastMessageDate = now;
+            }
+          }
+
+          await db.collection('Users').doc(users[i]).update({
+            chats,
+          });
+        }
+      }
+    }
   },
 };

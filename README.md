@@ -2,24 +2,25 @@ Clone do WhatsApp usando React(typescript) e firebase.
 
 -LOGIN-
 Tela simples de login com Google.
-![image](https://user-images.githubusercontent.com/69858181/119681640-a1eba680-be18-11eb-99af-b75fa20e15eb.png)
+![image](https://user-images.githubusercontent.com/69858181/121209624-5e019400-c851-11eb-8f1b-07fe3c187b45.png)
+
 
 -INICIO-
-![image](https://user-images.githubusercontent.com/69858181/119681704-ad3ed200-be18-11eb-8dcc-dbc48e312e2e.png)
+![image](https://user-images.githubusercontent.com/69858181/121209686-6e197380-c851-11eb-999e-de62a8ce08ed.png)
 
 -NOVO CHAT-
-![image](https://user-images.githubusercontent.com/69858181/119683773-4e7a5800-be1a-11eb-8e64-e733c671ad71.png)
+![image](https://user-images.githubusercontent.com/69858181/121209774-838e9d80-c851-11eb-9c1e-3736173d42a3.png)
 
 -CHAT-
 Tela do chat com a conversa.
-![image](https://user-images.githubusercontent.com/69858181/119681808-c47dbf80-be18-11eb-81e8-ad61e504d71f.png)
-![image](https://user-images.githubusercontent.com/69858181/119682027-f000aa00-be18-11eb-89e4-c582dcfe7a46.png)
+![image](https://user-images.githubusercontent.com/69858181/121209821-8e493280-c851-11eb-928a-b78b362143b5.png)
+![image](https://user-images.githubusercontent.com/69858181/121209880-9a34f480-c851-11eb-8d5d-cb1969cbdd7c.png)
 
 -EMOJIS-
 Tela de emojis, usando a lib "emoji-picker-react"
-![image](https://user-images.githubusercontent.com/69858181/119682106-ff7ff300-be18-11eb-8d22-85b90e4065fb.png)
+![image](https://user-images.githubusercontent.com/69858181/121209962-aa4cd400-c851-11eb-88e6-0e13404c7ac0.png)
 
 -ESCRITA POR RECONHECIMENTO DE VOZ-
 Usando o "window.SpeechRecognition || window.webkitSpeechRecognition" do próprio navegador.
-![image](https://user-images.githubusercontent.com/69858181/119682312-2ccca100-be19-11eb-8618-5077a136d530.png)
-![image](https://user-images.githubusercontent.com/69858181/119682358-3524dc00-be19-11eb-83ed-01eb91db25e3.png)
+![image](https://user-images.githubusercontent.com/69858181/121210072-c2245800-c851-11eb-88da-d291bd8c33cd.png)
+![image](https://user-images.githubusercontent.com/69858181/121210191-d9634580-c851-11eb-858f-17c6b7695ac9.png)
